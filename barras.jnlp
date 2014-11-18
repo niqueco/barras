@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="6.0" codebase="http://www.reloco.com.ar/barras/" href="barras.jnlp">
+	<information>
+		<title>Generador de código de barras</title>
+		<vendor>Nicolás Lichtmaier</vendor>
+		<homepage href="./" />
+		<offline-allowed/>
+		<description>Generador de código de barras para imprentas.
+		</description>
+		<shortcut>
+			<desktop />
+			<menu submenu="Generador de código de barras" />
+		</shortcut>
+		<icon href="barras.png"/>
+	</information>
+	<resources>
+		<java version="1.6+"/>
+		<jar href="barras.jar" />
+	</resources>
+	<application-desc />
+</jnlp>

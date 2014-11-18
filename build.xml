@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project default="jar">
+
+	<target name="compilar">
+		<mkdir dir="build"/>
+		<javac srcdir="src" destdir="build"/>
+		<copy todir="build">
+			<fileset dir="src">
+				<include name="**/*.png"/>
+				<include name="**/*.gif"/>
+				<include name="**/*.jpg"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="compilar">
+		<jar jarfile="barras.jar" basedir="build">
+			<manifest>
+				<attribute name="Main-Class" value="ar.com.imprenta_azul.barras.Ventana"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="build"/>
+		<delete file="barras.jar"/>
+	</target>
+</project>
