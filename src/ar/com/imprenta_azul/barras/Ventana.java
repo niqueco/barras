@@ -27,10 +27,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -42,8 +38,6 @@ import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -191,17 +185,10 @@ public class Ventana extends JFrame
 		agregarAccion(botonera, resultado.accionGrabar);
 		botonera.add(Box.createGlue());
 		JButton info = new JButton(new ImageIcon(Ventana.class.getResource("About24.gif")));
-		info.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e)
-			{
-				JOptionPane.showMessageDialog(Ventana.this
-						, "<html>Hecho por <b>Nicolás Lichtmaier</b> en diciembre de 2004.</html>"
-						, "Acerca..."
-						, JOptionPane.INFORMATION_MESSAGE);
-			}
-			
-		});
+		info.addActionListener(e -> JOptionPane.showMessageDialog(Ventana.this
+				, "<html>Hecho por <b>Nicolás Lichtmaier</b> en diciembre de 2004.</html>"
+				, "Acerca..."
+				, JOptionPane.INFORMATION_MESSAGE));
 		botonera.add(info);
 		p.add(botonera, BorderLayout.PAGE_START);
 		return p;
@@ -275,26 +262,16 @@ public class Ventana extends JFrame
 		ComboBoxModel tcm = new DefaultComboBoxModel(TipoComprobante.values());
 		JComboBox lista = new JComboBox(tcm);
 		agregarCampo(p, c, y++, label, lista);
-		lista.addItemListener(new ItemListener() {
-
-			public void itemStateChanged(ItemEvent e)
-			{
-				TipoComprobante t = (TipoComprobante) e.getItemSelectable().getSelectedObjects()[0];
-				barras.setTipoComprobante(t);
-			}			
+		lista.addItemListener(e -> {
+			TipoComprobante t = (TipoComprobante) e.getItemSelectable().getSelectedObjects()[0];
+			barras.setTipoComprobante(t);
 		});
 		barras.setTipoComprobante((TipoComprobante)lista.getSelectedItem());
 
 		label = new JLabel("Punto de venta");
 		label.setDisplayedMnemonic('P');
 		SpinnerNumberModel pvm = new SpinnerNumberModel(1, 1, 9999, 1);
-		pvm.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e)
-			{
-				barras.setPuntoDeVenta(((Number)((SpinnerModel)e.getSource()).getValue()).intValue());
-			}
-			
-		});
+		pvm.addChangeListener(e -> barras.setPuntoDeVenta(((Number)((SpinnerModel)e.getSource()).getValue()).intValue()));
 		JSpinner pv = new JSpinner(pvm);
 		agregarCampo(p, c, y++, label, pv);
 		barras.setPuntoDeVenta(1);
@@ -342,13 +319,7 @@ public class Ventana extends JFrame
 		calFut.add(Calendar.YEAR, 5);
 		SpinnerDateModel fvm = new SpinnerDateModel(cal.getTime(), hoy, calFut.getTime(), Calendar.DAY_OF_MONTH);
 		barras.setVencimiento(cal.getTime());
-		fvm.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e)
-			{
-				barras.setVencimiento((Date)((SpinnerModel)e.getSource()).getValue());
-			}
-			
-		});
+		fvm.addChangeListener(e -> barras.setVencimiento((Date)((SpinnerModel)e.getSource()).getValue()));
 		JSpinner sp = new JSpinner(fvm);
 		SimpleDateFormat df = (SimpleDateFormat)DateFormat.getDateInstance(DateFormat.SHORT);
 		sp.setEditor(new JSpinner.DateEditor(sp, df.toPattern()));

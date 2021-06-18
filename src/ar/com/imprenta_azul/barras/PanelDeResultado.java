@@ -24,8 +24,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
 import java.awt.geom.AffineTransform;
@@ -99,14 +97,7 @@ final class PanelDeResultado extends JPanel implements ClipboardOwner, PropertyC
 		accionCopiar.setEnabled(false);
 		accionGrabar.setEnabled(false);
 		DragSource ds = DragSource.getDefaultDragSource();
-		ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, new DragGestureListener() {
-
-			public void dragGestureRecognized(DragGestureEvent dge)
-			{
-				dge.startDrag(null, (Transferable) barras.clone());
-			}
-			
-		});
+		ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY, dge -> dge.startDrag(null, (Transferable) barras.clone()));
 		barras.addPropertyChangeListener(this);
 		setBackground(Color.WHITE);
 		setSize(605, 100);
