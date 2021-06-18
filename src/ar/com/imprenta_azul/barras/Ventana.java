@@ -44,7 +44,7 @@ import javax.swing.event.DocumentListener;
 @SuppressWarnings("serial")
 public class Ventana extends JFrame
 {
-	Barras barras = new Barras();
+	final Barras barras = new Barras();
 	// static Preferences prefs = Preferences.userNodeForPackage(Ventana.class);;	
 	
 	private PanelDeResultado resultado;
@@ -72,7 +72,7 @@ public class Ventana extends JFrame
 		try
 		{
 			b.add(new JComponent() {
-				Image logo = ImageIO.read(Ventana.class.getResourceAsStream("azul.png"));
+				final Image logo = ImageIO.read(Ventana.class.getResourceAsStream("azul.png"));
 				final static int margen = 50;
 
 				{
@@ -85,7 +85,7 @@ public class Ventana extends JFrame
 				{
 					super.paint(gg);
 					Graphics2D g = (Graphics2D) gg;
-					float prop = logo.getWidth(null) / logo.getHeight(null);
+					float prop = (float)logo.getWidth(null) / logo.getHeight(null);
 					int w, h, x, y;
 					int anchoComponente = getWidth();
 					int altoComponente = getHeight();
@@ -288,7 +288,7 @@ public class Ventana extends JFrame
 			{
 				try {
 					barras.setCAI(Long.parseLong(campoCAI.getText()));
-				} catch(RuntimeException e)
+				} catch(RuntimeException ignored)
 				{ }
 			}
 

@@ -28,7 +28,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -292,13 +291,10 @@ public class Barras implements Serializable, Cloneable, Transferable
 		return false;
 	}
 
-	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException
 	{
 		if(flavor.equals(DataFlavor.imageFlavor))
-		{
-			BufferedImage i = dameImagen();
-			return i;
-		}
+			return dameImagen();
 		throw new UnsupportedFlavorException(flavor);
 	}
 	BufferedImage dameImagen()

@@ -114,7 +114,7 @@ public class CUIT implements java.io.Serializable, Cloneable, Comparable<CUIT>
 	 * @param s el string
 	 * @return un nuevo string
 	 */
-	private static final String sacaGuiones(CharSequence s)
+	private static String sacaGuiones(CharSequence s)
 	{
 		int largo = s.length();
 		StringBuilder r = new StringBuilder(largo);
