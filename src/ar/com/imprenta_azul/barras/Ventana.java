@@ -259,8 +259,8 @@ public class Ventana extends JFrame
 
 		label = new JLabel("Tipo de comprobante");
 		label.setDisplayedMnemonic('T');
-		ComboBoxModel tcm = new DefaultComboBoxModel(TipoComprobante.values());
-		JComboBox lista = new JComboBox(tcm);
+		ComboBoxModel<TipoComprobante> tcm = new DefaultComboBoxModel<>(TipoComprobante.values());
+		JComboBox<TipoComprobante> lista = new JComboBox<>(tcm);
 		agregarCampo(p, c, y++, label, lista);
 		lista.addItemListener(e -> {
 			TipoComprobante t = (TipoComprobante) e.getItemSelectable().getSelectedObjects()[0];
